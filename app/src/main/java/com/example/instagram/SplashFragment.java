@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class SplashFragment extends Fragment {
     private NavController navController;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class SplashFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         navController = Navigation.findNavController(view);
 
         Handler handler = new Handler();
@@ -33,5 +38,14 @@ public class SplashFragment extends Fragment {
                 navController.navigate(R.id.action_splashFragment_to_signInFragment);
             }
         }, 2000);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if(firebaseAuth.getCurrentUser()!=null){
+            navController.navigate(R.id.action_splashFragment_to_homeFragment);
+        }
     }
 }
