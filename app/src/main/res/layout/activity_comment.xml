@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".CommentsFragment">
+    tools:context=".CommentActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/comment_edittext_layout"
+        android:id="@+id/post_comment_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:boxStrokeColor="@color/white"
@@ -17,29 +17,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/comment_edittext"
+            android:id="@+id/post_commentEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Write comment"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <com.google.android.material.textfield.TextInputEditText-->
-<!--        android:id="@+id/comment_edittext"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="30dp"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:backgroundTint="@color/black"-->
-<!--        android:ems="10"-->
-<!--        android:hint="write comment"-->
-<!--        android:inputType="textEmailAddress"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textColorHint="@android:color/darker_gray"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/add_comment"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.733"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <!--    <com.google.android.material.textfield.TextInputEditText-->
+    <!--        android:id="@+id/comment_edittext"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="30dp"-->
+    <!--        android:layout_marginBottom="16dp"-->
+    <!--        android:backgroundTint="@color/black"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="write comment"-->
+    <!--        android:inputType="textEmailAddress"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textColorHint="@android:color/darker_gray"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/add_comment"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.733"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/add_comment"
@@ -61,7 +61,7 @@
         android:layout_height="0dp"
         android:layout_margin="10dp"
         tools:listitem="@layout/comment"
-        app:layout_constraintBottom_toTopOf="@+id/comment_edittext_layout"
+        app:layout_constraintBottom_toTopOf="@+id/post_comment_edittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

@@ -31,6 +31,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Comment;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -133,7 +135,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             @Override
             public void onClick(View v) {
                //move to comment fragment
-                Intent intent = new Intent(context,CommentsFragment.class);
+                Intent intent = new Intent(context, CommentActivity.class);
                 intent.putExtra("postid",postId);
                 context.startActivity(intent);
             }
