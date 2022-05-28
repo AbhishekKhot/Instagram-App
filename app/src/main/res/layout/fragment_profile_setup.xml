@@ -63,12 +63,12 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />-->
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_btn_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
-        android:backgroundTint="@color/pink"
+        android:background="@drawable/all_button_background"
         android:text="SAVE"
         android:textSize="14sp"
         android:textColor="@color/white"

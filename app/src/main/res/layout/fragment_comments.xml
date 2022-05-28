@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         app:boxStrokeColor="@color/white"
         app:hintTextColor="@color/black"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
+        android:layout_margin="14dp"
         app:layout_constraintBottom_toTopOf="@+id/add_comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -42,12 +41,12 @@
 <!--        app:layout_constraintHorizontal_bias="0.733"-->
 <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/add_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
-        android:backgroundTint="@color/pink"
+        android:background="@drawable/all_button_background"
         android:text="ADD COMMENT"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -61,6 +60,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        tools:listitem="@layout/comment"
         app:layout_constraintBottom_toTopOf="@+id/comment_edittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

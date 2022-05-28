@@ -35,17 +35,13 @@ public class SplashFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                navController.navigate(R.id.action_splashFragment_to_signInFragment);
+                if(firebaseAuth.getCurrentUser()!=null){
+                    navController.navigate(R.id.action_splashFragment_to_homeFragment);
+                }
+                else{
+                    navController.navigate(R.id.action_splashFragment_to_signInFragment);
+                }
             }
         }, 2000);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        if(firebaseAuth.getCurrentUser()!=null){
-            navController.navigate(R.id.action_splashFragment_to_homeFragment);
-        }
     }
 }

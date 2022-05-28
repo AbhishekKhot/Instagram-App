@@ -19,12 +19,10 @@
 
     <ImageView
         android:id="@+id/post_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/ic_baseline_account_circle_24"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/ic_baseline_insert_photo_24"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -32,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/caption_edittext"
+        android:id="@+id/caption_edittextlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
@@ -43,11 +41,11 @@
         app:layout_constraintTop_toBottomOf="@+id/post_image">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passET"
+            android:id="@+id/caption_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Add caption"
-            android:inputType="textPassword" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
 <!--    <EditText-->
@@ -67,20 +65,20 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/post_image" />-->
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/add_post_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
         android:layout_marginTop="192dp"
-        android:backgroundTint="@color/pink"
+        android:background="@drawable/all_button_background"
         android:text="ADD POST"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/caption_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/caption_edittextlayout" />
 
     <ProgressBar
         android:id="@+id/post_progressBar"
