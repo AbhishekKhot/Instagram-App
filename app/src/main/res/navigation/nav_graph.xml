@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.instagram.SplashFragment"
+        android:name="com.example.instagram.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.instagram.SignInFragment"
+        android:name="com.example.instagram.ui.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.instagram.SignUpFragment"
+        android:name="com.example.instagram.ui.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileSetupFragment"
-        android:name="com.example.instagram.ProfileSetupFragment"
+        android:name="com.example.instagram.ui.ProfileSetupFragment"
         android:label="fragment_profile_setup"
         tools:layout="@layout/fragment_profile_setup" >
         <action
@@ -49,12 +49,12 @@
     </fragment>
     <fragment
         android:id="@+id/commentsFragment"
-        android:name="com.example.instagram.CommentsFragment"
+        android:name="com.example.instagram.ui.CommentsFragment"
         android:label="fragment_comments"
         tools:layout="@layout/fragment_comments" />
     <fragment
         android:id="@+id/postFragment"
-        android:name="com.example.instagram.PostFragment"
+        android:name="com.example.instagram.ui.PostFragment"
         android:label="fragment_post"
         tools:layout="@layout/fragment_post" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.instagram.HomeFragment"
+        android:name="com.example.instagram.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action

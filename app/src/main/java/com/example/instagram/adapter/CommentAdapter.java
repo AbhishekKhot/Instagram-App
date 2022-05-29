@@ -1,14 +1,21 @@
-package com.example.instagram;
+package com.example.instagram.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.example.instagram.model.Comments;
+import com.example.instagram.R;
+import com.example.instagram.model.User;
+
 import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
@@ -25,7 +32,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.comment,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.comment, parent, false);
         return new CommentViewHolder(view);
     }
 
@@ -44,8 +51,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         return commentsList.size();
     }
 
-    public class CommentViewHolder extends RecyclerView.ViewHolder{
-        TextView mComment,mUserName;
+    public class CommentViewHolder extends RecyclerView.ViewHolder {
+        TextView mComment, mUserName;
         CircleImageView circleImageView;
         View mView;
 
@@ -59,12 +66,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             mComment.setText(comment);
         }
 
-        public void setmUserName(String userName){
+        public void setmUserName(String userName) {
             mUserName = mView.findViewById(R.id.comment_user);
             mUserName.setText(userName);
         }
 
-        public void setCircleImageView(String profilePic){
+        public void setCircleImageView(String profilePic) {
             circleImageView = mView.findViewById(R.id.comment_Profile_pic);
             Glide.with(context).load(profilePic).into(circleImageView);
         }

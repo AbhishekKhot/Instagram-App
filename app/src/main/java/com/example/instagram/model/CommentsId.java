@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.model;
 
 import androidx.annotation.NonNull;
 

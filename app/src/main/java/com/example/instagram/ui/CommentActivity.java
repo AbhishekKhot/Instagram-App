@@ -1,22 +1,23 @@
-package com.example.instagram;
-
-import android.os.Bundle;
+package com.example.instagram.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.instagram.R;
+import com.example.instagram.adapter.CommentAdapter;
+import com.example.instagram.model.Comments;
+import com.example.instagram.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,14 +27,13 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommentsFragment extends Fragment {
-    private EditText commentEdit;
+public class CommentActivity extends AppCompatActivity {
+    private TextInputEditText commentEdit;
     private Button mAddCommentBtn;
     private RecyclerView mCommentRecyclerView;
     private FirebaseFirestore firebaseFirestore;
@@ -45,17 +45,13 @@ public class CommentsFragment extends Fragment {
     private List<User> usersList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_comments, container, false);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_comment);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        commentEdit = view.findViewById(R.id.comment_edittext);
-        mAddCommentBtn = view.findViewById(R.id.add_comment);
-        mCommentRecyclerView = view.findViewById(R.id.comment_recyclerView);
+        commentEdit = findViewById(R.id.post_commentEditText);
+        mAddCommentBtn = findViewById(R.id.add_comment);
+        mCommentRecyclerView = findViewById(R.id.comment_recyclerView);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -63,19 +59,20 @@ public class CommentsFragment extends Fragment {
 
         mList = new ArrayList<>();
         usersList = new ArrayList<>();
-        adapter = new CommentAdapter(requireActivity(),usersList,mList);
+        adapter = new CommentAdapter(this,usersList,mList);
 
-        post_id = requireActivity().getIntent().getStringExtra("postid");
+        post_id = getIntent().getStringExtra("postid");
         mCommentRecyclerView.setHasFixedSize(true);
-        mCommentRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        mCommentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mCommentRecyclerView.setAdapter(adapter);
 
-        firebaseFirestore.collection("Posts/" + post_id + "/Comments").addSnapshotListener(requireActivity(), new EventListener<QuerySnapshot>() {
+
+        firebaseFirestore.collection("Posts/" + post_id + "/Comments").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for(DocumentChange documentChange : value.getDocumentChanges()){
-                   if(documentChange.getType() == DocumentChange.Type.ADDED){
-                       Comments comments = documentChange.getDocument().toObject(Comments.class).withId(documentChange.getDocument().getId());
+                    if(documentChange.getType() == DocumentChange.Type.ADDED){
+                        Comments comments = documentChange.getDocument().toObject(Comments.class).withId(documentChange.getDocument().getId());
                         String userId = documentChange.getDocument().getString("user");
 
                         firebaseFirestore.collection("Users").document(userId).get()
@@ -89,14 +86,14 @@ public class CommentsFragment extends Fragment {
                                             adapter.notifyDataSetChanged();
                                         }
                                         else{
-                                            Toast.makeText(requireActivity(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(CommentActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
-                   }
-                   else{
-                       adapter.notifyDataSetChanged();
-                   }
+                    }
+                    else{
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
         });
@@ -114,16 +111,17 @@ public class CommentsFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(requireContext(),"Comment added successfully",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CommentActivity.this,"Comment added successfully",Toast.LENGTH_SHORT).show();
+
                             }
                             else{
-                                Toast.makeText(requireContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CommentActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }
                 else{
-                    Toast.makeText(requireContext(),"Please write comment",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentActivity.this,"Please write comment",Toast.LENGTH_SHORT).show();
                 }
             }
         });

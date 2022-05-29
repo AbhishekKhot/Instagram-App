@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram.ui.CommentActivity;
+import com.example.instagram.model.Post;
+import com.example.instagram.R;
+import com.example.instagram.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,8 +32,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.w3c.dom.Comment;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -58,7 +58,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.post,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.post, parent, false);
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         return new PostViewHolder(view);
@@ -72,10 +72,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
         long milliseconds = post.getTime().getTime();
-        String date  = DateFormat.format("MM/dd/yyyy" , new Date(milliseconds)).toString();
+        String date = DateFormat.format("MM/dd/yyyy", new Date(milliseconds)).toString();
         holder.setPostDate(date);
 
-        String userName= userList.get(position).getName();
+        String userName = userList.get(position).getName();
         String userImage = userList.get(position).getImage();
         holder.setProfilePic(userImage);
         holder.setPostUserName(userName);
@@ -89,12 +89,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 firebaseFirestore.collection("Posts/" + postId + "/Likes").document(currentUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(!task.getResult().exists()){
-                            Map<String,Object> likeMap = new HashMap<>();
+                        if (!task.getResult().exists()) {
+                            Map<String, Object> likeMap = new HashMap<>();
                             likeMap.put("timestamp", FieldValue.serverTimestamp());
                             firebaseFirestore.collection("Posts/" + postId + "/Likes").document(currentUserId).set(likeMap);
-                        }
-                        else{
+                        } else {
                             firebaseFirestore.collection("Posts/" + postId + "/Likes").document(currentUserId).delete();
                         }
                     }
@@ -105,11 +104,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         firebaseFirestore.collection("Posts/" + postId + "/Likes").document(currentUserId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error == null){
-                    if(value.exists()){
+                if (error == null) {
+                    if (value.exists()) {
                         holder.likePic.setImageDrawable(context.getDrawable(R.drawable.ic_outline_favorite_border_24));
-                    }
-                    else{
+                    } else {
                         holder.likePic.setImageDrawable(context.getDrawable(R.drawable.ic_outline_favorite_border_24));
                     }
                 }
@@ -119,12 +117,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         firebaseFirestore.collection("Posts/" + postId + "/Likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error==null){
-                    if(!value.isEmpty()){
+                if (error == null) {
+                    if (!value.isEmpty()) {
                         int count = value.size();
                         holder.setPostLikes(count);
-                    }
-                    else{
+                    } else {
                         holder.setPostLikes(0);
                     }
                 }
@@ -134,14 +131,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.commentPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //move to comment fragment
+                //move to comment fragment
                 Intent intent = new Intent(context, CommentActivity.class);
-                intent.putExtra("postid",postId);
+                intent.putExtra("postid", postId);
                 context.startActivity(intent);
             }
         });
 
-        if(currentUserId.equals(post.getUser())){
+        if (currentUserId.equals(post.getUser())) {
             holder.deleteButton.setVisibility(View.VISIBLE);
             holder.deleteButton.setClickable(true);
             holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +147,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     AlertDialog.Builder alert = new AlertDialog.Builder(context);
                     alert.setTitle("Delete")
                             .setMessage("Are you Sure?")
-                            .setNegativeButton("No",null)
+                            .setNegativeButton("No", null)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -158,7 +155,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    for(QueryDocumentSnapshot snapshot : task.getResult()){
+                                                    for (QueryDocumentSnapshot snapshot : task.getResult()) {
                                                         firebaseFirestore.collection("Posts/" + postId + "/Comments").document(snapshot.getId()).delete();
                                                     }
                                                 }
@@ -167,7 +164,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    for(QueryDocumentSnapshot snapshot : task.getResult()){
+                                                    for (QueryDocumentSnapshot snapshot : task.getResult()) {
                                                         firebaseFirestore.collection("Posts/" + postId + "Likes/").document(snapshot.getId()).delete();
                                                     }
                                                 }
@@ -188,10 +185,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return postList.size();
     }
 
-    public class PostViewHolder extends RecyclerView.ViewHolder{
-        ImageView postPic,commentPic,likePic;
+    public class PostViewHolder extends RecyclerView.ViewHolder {
+        ImageView postPic, commentPic, likePic;
         CircleImageView profilePic;
-        TextView postUserName,postDate,postCaption,postLike;
+        TextView postUserName, postDate, postCaption, postLike;
         ImageButton deleteButton;
         View view;
 
@@ -203,32 +200,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             deleteButton = view.findViewById(R.id.delete_btn);
         }
 
-        public void setPostLikes(int count){
+        public void setPostLikes(int count) {
             postLike = view.findViewById(R.id.like_count_tv);
             postLike.setText(count + " Likes");
         }
 
-        public void setPostPic(String postUrl){
+        public void setPostPic(String postUrl) {
             postPic = view.findViewById(R.id.user_post);
             Glide.with(context).load(postUrl).into(postPic);
         }
 
-        public void setProfilePic(String profilePicUrl){
+        public void setProfilePic(String profilePicUrl) {
             profilePic = view.findViewById(R.id.profile_pic);
             Glide.with(context).load(profilePicUrl).into(profilePic);
         }
 
-        public void setPostUserName(String userName){
+        public void setPostUserName(String userName) {
             postUserName = view.findViewById(R.id.username_tv);
             postUserName.setText(userName);
         }
 
-        public void setPostDate(String date){
+        public void setPostDate(String date) {
             postDate = view.findViewById(R.id.date_tv);
             postDate.setText(date);
         }
 
-        public void setPostCaption(String caption){
+        public void setPostCaption(String caption) {
             postCaption = view.findViewById(R.id.caption_tv);
             postCaption.setText(caption);
         }

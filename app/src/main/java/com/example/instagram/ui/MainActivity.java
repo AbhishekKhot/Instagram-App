@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.ui;
 
 import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
+
+import com.example.instagram.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,17 +17,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
 
-
-        // Get the navigation host fragment from this Activity
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
 
-        // Instantiate the navController using the NavHostFragment
         navController = navHostFragment.getNavController();
-
-        // Make sure actions in the ActionBar get propagated to the NavController
-       // setupActionBarWithNavController(this, navController);
     }
 
     @Override

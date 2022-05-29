@@ -4,23 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ProfileSetupFragment">
-
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/setup_toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/pink"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    tools:context=".ui.ProfileSetupFragment">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="116dp"
         android:src="@drawable/ic_baseline_account_circle_24"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,29 +36,13 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <EditText-->
-<!--        android:id="@+id/profile_name"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="30dp"-->
-<!--        android:layout_marginTop="102dp"-->
-<!--        android:backgroundTint="@color/pink"-->
-<!--        android:ems="10"-->
-<!--        android:hint="username"-->
-<!--        android:inputType="textPersonName"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textColorHint="@android:color/darker_gray"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />-->
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_btn_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
         android:background="@drawable/all_button_background"
-        android:text="SAVE"
+        android:text="@string/save"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:textStyle="bold"

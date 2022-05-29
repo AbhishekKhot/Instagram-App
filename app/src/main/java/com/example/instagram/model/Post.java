@@ -1,10 +1,8 @@
-package com.example.instagram;
-
-import com.google.firebase.firestore.Exclude;
+package com.example.instagram.model;
 
 import java.util.Date;
 
-public class Post extends PostId {
+public class Post extends com.example.instagram.model.PostId {
    private String image,user,caption;
    private Date time;
 

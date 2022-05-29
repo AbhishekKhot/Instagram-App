@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.ui;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
+import com.example.instagram.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

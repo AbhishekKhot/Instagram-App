@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.ui;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.instagram.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

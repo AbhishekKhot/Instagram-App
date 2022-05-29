@@ -1,6 +1,6 @@
-package com.example.instagram;
+package com.example.instagram.model;
 
-public class Comments extends CommentsId {
+public class Comments extends com.example.instagram.model.CommentsId {
     private String comment,user;
 
     public String getComment() {

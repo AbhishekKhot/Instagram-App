@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.ui;
 
 import android.os.Bundle;
 
@@ -15,6 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.instagram.R;
+import com.example.instagram.model.User;
+import com.example.instagram.adapter.PostAdapter;
+import com.example.instagram.model.Post;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,7 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firestore.v1.Document;
 
 import java.util.ArrayList;
 import java.util.List;

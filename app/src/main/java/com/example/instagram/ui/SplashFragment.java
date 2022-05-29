@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.instagram.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 
